@@ -1,0 +1,9 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/tzdanows/proto/generated/go
+plugins:
+  - name: go
+    out: generated/go
+    opt: paths=source_relative

@@ -1,0 +1,104 @@
+.env
+
+# Go specific
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Go workspace file
+go.work
+
+# Generated Go files
+/gen
+
+# Buf generated files
+*.bin
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker
+*.env
+.dockerignore
+
+# Kubernetes
+*.kubeconfig
+
+# Minikube
+.minikube/
+
+# Skaffold
+.skaffold/
+
+# Tilt
+tilt_modules/
+
+# Node (for potential frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# PostgreSQL
+*.sql
+*.dump
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Binary files
+*.bin
+
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+
+# Output of the go coverage tool
+*.out
+
+# Compiled protobuf files
+*.pb.go
+
+# Buf
+.buf/
+
+# Any other build output
+/build/
+/dist/

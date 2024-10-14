@@ -1,0 +1,11 @@
+version: v1
+name: buf.build/tzdanows/url-shortener
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT
+
+
+
