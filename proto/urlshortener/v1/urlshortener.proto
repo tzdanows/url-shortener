@@ -1,26 +1,37 @@
+// Protocol buffer version
 syntax = "proto3";
 
+// Package declaration for the URL shortener service
 package urlshortener.v1;
 
-option go_package = "github.com/yourusername/url-shortener/gen/go/urlshortener/v1;urlshortenerv1";
-
+// URLShortenerService defines the gRPC service for URL shortening
 service URLShortenerService {
+  // ShortenURL takes a long URL and returns a shortened version
   rpc ShortenURL(ShortenURLRequest) returns (ShortenURLResponse) {}
+  // GetOriginalURL takes a shortened URL and returns the original long URL
   rpc GetOriginalURL(GetOriginalURLRequest) returns (GetOriginalURLResponse) {}
 }
 
+// Request message for shortening a URL
 message ShortenURLRequest {
+  // The original long URL to be shortened
   string long_url = 1;
 }
 
+// Response message containing the shortened URL
 message ShortenURLResponse {
+  // The shortened URL
   string short_url = 1;
 }
 
+// Request message for retrieving the original URL
 message GetOriginalURLRequest {
+  // The shortened URL to be expanded
   string short_url = 1;
 }
 
+// Response message containing the original long URL
 message GetOriginalURLResponse {
+  // The original long URL
   string long_url = 1;
 }
