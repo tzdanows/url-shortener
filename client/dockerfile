@@ -5,17 +5,17 @@ FROM golang:1.22.8 as builder
 
 WORKDIR /build
 
-# Copy go.mod and go.sum from the server directory
-COPY server/go.mod server/go.sum ./
+# Copy go.mod and go.sum from the client directory
+COPY client/go.mod client/go.sum ./
 
 # Install the Go dependencies
 RUN go mod download
 
-# Copy the server directory contents
-COPY server .
+# Copy the client directory contents
+COPY client .
 
-# Build the "server" executable
-RUN CGO_ENABLED=0 GOOS=linux go build -o server_binary .
+# Build the "client" executable
+RUN CGO_ENABLED=0 GOOS=linux go build -o client_binary .
 
 # Stage 2: Create a lightweight runtime image
 FROM alpine:3.14
@@ -23,7 +23,7 @@ FROM alpine:3.14
 WORKDIR /app
 
 # Copy the built executable from the builder stage
-COPY --from=builder /build/server_binary /app/server
+COPY --from=builder /build/client_binary /app/client
 
 # Set the entrypoint to run the executable
-ENTRYPOINT ["/app/server"]
+ENTRYPOINT ["/app/client"]
