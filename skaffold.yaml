@@ -1,0 +1,28 @@
+apiVersion: skaffold/v3
+kind: Config
+metadata:
+  name: url-shortener
+build:
+  artifacts:
+    - image: url-shortener-server
+      context: .
+      docker:
+        dockerfile: server/Dockerfile
+    - image: url-shortener-client
+      context: .
+      docker:
+        dockerfile: client/Dockerfile
+  tagPolicy:
+    gitCommit: {}
+  local:
+    useBuildkit: true
+manifests:
+  rawYaml:
+    - server/server-deploy.yaml
+deploy:
+  kubectl: {}
+portForward:
+  - resourceType: service
+    resourceName: url-shortener-server
+    port: 8080
+    localPort: 8080
