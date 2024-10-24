@@ -1,0 +1,50 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: urlshortener-db
+spec:
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  
+  # Storage configuration
+  storage:
+    size: 1Gi
+    storageClass: standard
+  
+  # PostgreSQL configuration
+  postgresql:
+    parameters:
+      shared_buffers: 256MB
+      max_connections: "100"
+      
+  # Resource requirements
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "0.5"
+    limits:
+      memory: "1Gi"
+      cpu: "1"
+
+  # Database initialization
+  bootstrap:
+    initdb:
+      database: urlshortenerdb
+      owner: app
+      # Set default authentication method and initial user
+      postInitApplicationSQL:
+        - ALTER USER app WITH PASSWORD 'postgrespass';
+        - GRANT ALL PRIVILEGES ON DATABASE urlshortenerdb TO app;
+
+  # Specify superuser credentials
+  superuserSecret:
+    name: urlshortener-superuser
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: urlshortener-superuser
+type: Opaque
+stringData:
+  username: postgres
+  password: postgrespass
